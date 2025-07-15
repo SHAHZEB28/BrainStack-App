@@ -1,0 +1,19 @@
+import * as React from "react";
+import { SVGProps } from "react";
+
+export const TweetsIcon = (props: SVGProps<SVGSVGElement>) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={20}
+    height={20}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={1.5}
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    {...props}
+  >
+    <path d="M22 4s-.7 2.1-2 3.4c1.6 1.4 2.8 3.2 2.8 5.1 0 5.2-4.2 9.4-9.4 9.4S3 17.7 3 12.5c0-1.9 1.2-3.7 2.8-5.1-1.3-1.3-2-3.4-2-3.4s4.6 2.1 7.2 4.3c2.6-2.2 7.2-4.3 7.2-4.3z" />
+  </svg>
+);
