@@ -2,7 +2,8 @@
     "rewrites": [
       {
         "source": "/api/:path*",
-        "destination": "https://your-brainy-backend.onrender.com/api/:path*"
+        "destination": "https://nexus-the-digital-second-brain.onrender.com/api/:path*"
       }
     ]
   }
+  
