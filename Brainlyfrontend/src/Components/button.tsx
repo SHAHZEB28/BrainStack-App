@@ -1,16 +1,17 @@
 import * as React from "react";
 import { motion, type HTMLMotionProps } from "framer-motion";
 import { cva, type VariantProps } from "class-variance-authority";
-import { cn } from "../utils";
+import { cn } from "../utils"; // Assuming you have this utility file
 
-// This defines the different styles for the button, including variants and sizes.
+// --- FIXED SECTION ---
+// The class names here now correctly match your tailwind.config.js theme.
 const buttonVariants = cva(
   "inline-flex items-center justify-center rounded-lg text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none",
   {
     variants: {
       variant: {
-        primary: "bg-primary text-white hover:bg-primary/90",
-        secondary: "bg-secondary text-primary hover:bg-secondary/80",
+        primary: "bg-brand-primary text-white hover:bg-brand-primary/90",
+        secondary: "bg-brand-secondary text-brand-primary hover:bg-brand-secondary/80",
       },
       size: {
         sm: "h-9 px-3",

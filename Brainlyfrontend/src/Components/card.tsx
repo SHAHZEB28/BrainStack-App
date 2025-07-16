@@ -7,7 +7,7 @@ import { CheckIcon } from "../Icons/checkicon";
 interface CardProps {
   icon: ReactNode;
   title: string;
-  tags: string[]; // Expects a prop named 'tags' (plural)
+  tags: string[];
   date: string;
   link: string;
   children: ReactNode;
@@ -40,8 +40,9 @@ export function Card({ icon, title, tags, date, link, children, onDelete }: Card
   return (
     <motion.div
       variants={cardVariants}
-      className="p-5 bg-white rounded-xl border border-secondary-dark shadow-subtle flex flex-col h-full"
-      whileHover={{ y: -5, boxShadow: "0 8px 24px rgba(0, 0, 0, 0.08)" }}
+      // The card now uses the new design system for a consistent and professional look.
+      className="p-5 bg-white rounded-xl border border-ui-border shadow-subtle flex flex-col h-full"
+      whileHover={{ y: -5, boxShadow: "var(--tw-shadow-lifted)" }}
       transition={{ duration: 0.2 }}
     >
       <div className="flex justify-between items-start mb-4">
@@ -50,18 +51,17 @@ export function Card({ icon, title, tags, date, link, children, onDelete }: Card
           <h3 className="font-semibold text-text-primary">{title}</h3>
         </div>
         <div className="flex items-center space-x-3 text-text-secondary">
-          <button onClick={handleShareClick} className="hover:text-primary transition-colors">
+          <button onClick={handleShareClick} className="hover:text-brand-primary transition-colors">
             {isCopied ? <CheckIcon className="text-green-500" /> : <ShareIcon size="sm" />}
           </button>
-          <button onClick={onDelete} className="hover:text-accent transition-colors"><DeleteIcon /></button>
+          <button onClick={onDelete} className="hover:text-brand-accent transition-colors"><DeleteIcon /></button>
         </div>
       </div>
       <div className="text-text-primary text-sm mb-4 flex-grow">{children}</div>
       <div className="flex justify-between items-center text-xs text-text-secondary">
         <div className="flex flex-wrap gap-2">
-          {/* This now correctly uses the 'tags' prop to render the tags. */}
           {tags.map((tag) => (
-            <span key={tag} className="bg-secondary-dark text-text-secondary px-2 py-1 rounded-md">
+            <span key={tag} className="bg-brand-secondary text-text-secondary px-2 py-1 rounded-md">
               #{tag}
             </span>
           ))}

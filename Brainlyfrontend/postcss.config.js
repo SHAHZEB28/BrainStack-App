@@ -1,4 +1,5 @@
-module.exports = {
+// Brainlyfrontend/postcss.config.js
+export default {
   plugins: {
     tailwindcss: {},
     autoprefixer: {},
