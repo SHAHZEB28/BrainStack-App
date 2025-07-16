@@ -7,7 +7,6 @@ import { Modal } from "./Components/modal";
 import { ShareModal } from "./Components/sharemodal";
 import { PlusIcon } from "./Icons/plusicon";
 import { ShareIcon } from "./Icons/shareicon";
-// FIX: Corrected all icon and component import paths to be individual and match your file structure.
 import { DocumentIcon } from "./Icons/documenticon";
 import { TweetsIcon } from "./Icons/tweeticon";
 import { VideosIcon } from "./Icons/videoicon";
@@ -32,8 +31,8 @@ type FormData = {
   title: string;
   link?: string;
   content?: string;
-  tags?: string; 
-}
+  tags?: string;
+};
 
 const categoryInfo = {
   all: { title: "Add New Content", fieldLabel: "Select a category first", fieldType: "none", icon: <DocumentIcon /> },
@@ -75,24 +74,22 @@ function App() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Keep this check to prevent adding content when 'all' or a tag is selected
-    // as the form fields won't be appropriate in the modal.
     if (activeFilter === 'all' || activeFilter.startsWith('#')) {
         alert("Please select a specific content category (e.g., Tweet, YouTube, Document, Link) from the sidebar before adding content.");
         return;
     }
     const type = activeFilter as NewContentData['type'];
-    
+
     const tagsArray = formData.tags
       ? formData.tags.split(',').map(tag => tag.trim()).filter(Boolean)
       : [];
 
-    await addContent({ 
+    await addContent({
       title: formData.title,
       link: formData.link,
       content: formData.content,
       tag: tagsArray,
-      type 
+      type
     });
     setIsAddModalOpen(false);
   };
@@ -126,8 +123,19 @@ function App() {
     return null;
   };
 
+  // This logic determines the correct title to display based on the active filter.
+  const getDisplayTitle = () => {
+    if (activeFilter.startsWith('#')) {
+      return `Notes tagged with ${activeFilter}`;
+    }
+    if (activeFilter === 'all') {
+      return 'All Notes';
+    }
+    return categoryInfo[activeFilter as keyof typeof categoryInfo]?.title || 'All Notes';
+  };
+  const displayTitle = getDisplayTitle();
+
   return (
-    // The main container now uses the new background color from the theme.
     <div className="flex min-h-screen bg-ui-background">
       <Sidebar
         onLogout={handleLogout}
@@ -142,20 +150,22 @@ function App() {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="flex justify-between items-center mb-8"
         >
-          {/* The heading now uses the new text colors and font styles. */}
+          {/* The title is now dynamic */}
           <h2 className="text-4xl font-bold text-text-primary">
-            All Notes
+            {displayTitle}
           </h2>
           <div className="flex items-center space-x-4">
             <Button variant="secondary" startIcon={<ShareIcon size="sm" />} text="Share Brain" onClick={() => setIsShareModalOpen(true)} />
-            <Button
-              variant="primary"
-              startIcon={<PlusIcon size="sm" />}
-              text="Add Content"
-              onClick={() => setIsAddModalOpen(true)}
-              // !!! IMPORTANT CHANGE HERE: Removed the 'disabled' prop !!!
-              // This makes the button always enabled/clickable regardless of the activeFilter.
-            />
+            
+            {/* The button is now conditional */}
+            {(activeFilter !== 'all' && !activeFilter.startsWith('#')) && (
+              <Button
+                variant="primary"
+                startIcon={<PlusIcon size="sm" />}
+                text="Add Content"
+                onClick={() => setIsAddModalOpen(true)}
+              />
+            )}
           </div>
         </motion.header>
 
