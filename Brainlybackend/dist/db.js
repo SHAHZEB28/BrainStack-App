@@ -35,7 +35,12 @@ var __importStar = (this && this.__importStar) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.LinkModel = exports.ContentModel = exports.UserModel = void 0;
 const mongoose_1 = __importStar(require("mongoose"));
-mongoose_1.default.connect("mongodb://localhost:27017/brainly")
+// This is the crucial change for deployment.
+// It tells your application to use the DATABASE_URL from Render's environment variables.
+// If it can't find that variable (like when you're running it locally),
+// it will fall back to your local database connection.
+const connectionString = process.env.DATABASE_URL || "mongodb://localhost:27017/brainly";
+mongoose_1.default.connect(connectionString)
     .then(() => console.log("MongoDB connected successfully."))
     .catch(err => console.error("MongoDB connection error:", err));
 const UserSchema = new mongoose_1.Schema({
@@ -45,7 +50,6 @@ const UserSchema = new mongoose_1.Schema({
 exports.UserModel = (0, mongoose_1.model)("User", UserSchema);
 const ContentSchema = new mongoose_1.Schema({
     title: String,
-    // Both link and content are now optional strings.
     link: { type: String, required: false },
     content: { type: String, required: false },
     type: String,
