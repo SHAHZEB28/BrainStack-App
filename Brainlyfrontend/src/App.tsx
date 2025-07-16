@@ -122,7 +122,6 @@ function App() {
   };
 
   return (
-    // The main container now uses the new background color from the theme.
     <div className="flex min-h-screen bg-ui-background">
       <Sidebar
         onLogout={handleLogout}
@@ -130,19 +129,18 @@ function App() {
         onFilterChange={setActiveFilter}
         tags={allTags}
       />
-      <div className="flex-1 p-8">
+      <main className="flex-1 p-6 md:p-10">
         <motion.header
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.2 }}
           className="flex justify-between items-center mb-8"
         >
-          {/* The heading now uses the new text colors and font styles. */}
-          <h2 className="text-4xl font-bold text-text-primary">
+          <h2 className="text-3xl md:text-4xl font-bold text-text-primary">
             All Notes
           </h2>
-          <div className="flex items-center space-x-4">
-            <Button variant="secondary" startIcon={<ShareIcon size="sm" />} text="Share Brain" onClick={() => setIsShareModalOpen(true)} />
+          <div className="flex items-center space-x-2 md:space-x-4">
+            <Button variant="secondary" startIcon={<ShareIcon size="sm" />} text="Share" onClick={() => setIsShareModalOpen(true)} />
             <Button
               variant="primary"
               startIcon={<PlusIcon size="sm" />}
@@ -154,13 +152,13 @@ function App() {
         </motion.header>
 
         <motion.main
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
-          {loading && <p>Loading...</p>}
-          {error && <p className="text-brand-accent">Error: {error}</p>}
+          {loading && <p className="text-text-light col-span-full text-center p-10">Loading your brain...</p>}
+          {error && <p className="text-brand-accent col-span-full text-center p-10">Error: {error}</p>}
           <AnimatePresence>
             {filteredContent.map((item) => (
               <Card
@@ -177,7 +175,7 @@ function App() {
             ))}
           </AnimatePresence>
         </motion.main>
-      </div>
+      </main>
 
       <Modal
         isOpen={isAddModalOpen}

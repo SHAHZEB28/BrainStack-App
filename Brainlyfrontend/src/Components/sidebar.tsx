@@ -17,11 +17,15 @@ interface SidebarProps {
   tags: string[];
 }
 
-const containerVariants: Variants = {
-  hidden: { opacity: 0 },
+const sidebarVariants: Variants = {
+  hidden: { x: -256, opacity: 0 },
   visible: {
+    x: 0,
     opacity: 1,
     transition: {
+      type: "spring",
+      stiffness: 100,
+      damping: 20,
       staggerChildren: 0.05,
     },
   },
@@ -38,16 +42,16 @@ export const Sidebar = ({ onLogout, activeFilter, onFilterChange, tags }: Sideba
 
   return (
     <motion.aside
-      variants={containerVariants}
+      variants={sidebarVariants}
       initial="hidden"
       animate="visible"
-      className="w-64 p-4 bg-white border-r border-secondary-dark h-screen sticky top-0 flex flex-col"
+      // The sidebar now has a slightly different background and a subtle border.
+      className="w-64 p-4 bg-white/50 backdrop-blur-lg border-r border-ui-border h-screen sticky top-0 flex flex-col"
     >
       <div>
         <motion.div variants={itemVariants} className="flex items-center mb-8">
           <BrainIcon className="mr-3" />
-          {/* FIX: The heading now has a gradient text style for a more modern look. */}
-          <h1 className="text-xl font-extrabold bg-gradient-to-r from-primary to-indigo-600 bg-clip-text text-transparent">
+          <h1 className="text-xl font-extrabold text-text-primary">
             Second Brain
           </h1>
         </motion.div>
@@ -58,7 +62,7 @@ export const Sidebar = ({ onLogout, activeFilter, onFilterChange, tags }: Sideba
           <motion.div variants={itemVariants}><SidebarItem icon={<DocumentIcon />} text="Documents" active={activeFilter === 'document'} onClick={() => onFilterChange('document')} /></motion.div>
           <motion.div variants={itemVariants}><SidebarItem icon={<LinkIcon />} text="Links" active={activeFilter === 'link'} onClick={() => onFilterChange('link')} /></motion.div>
           
-          <motion.div variants={itemVariants} className="pt-4 mt-4 border-t border-secondary-dark">
+          <motion.div variants={itemVariants} className="pt-4 mt-4 border-t border-ui-border">
             <SidebarItem
               icon={<TagIcon />}
               text="# Tags"

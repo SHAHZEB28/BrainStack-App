@@ -1,10 +1,22 @@
-/* These three directives are essential. They are what inject all of Tailwind's */
-/* base styles, component classes, and utility classes into your application. */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* You can add any custom global styles below this line. */
+/* A subtle, animated gradient background for a modern and professional feel */
 body {
-  background-color: #f7fafc; /* Matches the new theme */
+  background: linear-gradient(-45deg, #f7fafc, #f0f2f5, #e9defa, #dbeafe);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
