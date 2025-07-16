@@ -4,24 +4,6 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx,html}"
   ],
-  safelist: [
-    'bg-brand-primary',
-    'text-white',
-    'hover:bg-brand-primary/90',
-    'bg-brand-secondary',
-    'text-brand-primary',
-    'hover:bg-brand-secondary/80',
-    'h-9',
-    'h-10',
-    'h-11',
-    'px-3',
-    'px-4',
-    'px-8',
-    'py-2',
-    'rounded-lg',
-    'text-sm',
-    'font-medium'
-  ],
   theme: {
     extend: {
       colors: {
@@ -32,12 +14,14 @@ export default {
         },
         text:  { 
           primary: '#1a202c', 
-          secondary: '#4a5568', // Made slightly darker for better readability
+          secondary: '#4a5568',
           light: '#a0aec0' 
         },
         ui:    { 
-          background: '#f7fafc', 
-          border: '#cbd5e1', 
+          // Changed background to a very light purple (Lavender)
+          background: '#E6E6FA', // Very light purple
+          // Border remains black as per your previous request
+          border: '#000000', // Black
           hover: '#f3f4f6', 
         },
       },

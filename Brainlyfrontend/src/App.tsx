@@ -75,7 +75,12 @@ function App() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (activeFilter === 'all' || activeFilter.startsWith('#')) return;
+    // Keep this check to prevent adding content when 'all' or a tag is selected
+    // as the form fields won't be appropriate in the modal.
+    if (activeFilter === 'all' || activeFilter.startsWith('#')) {
+        alert("Please select a specific content category (e.g., Tweet, YouTube, Document, Link) from the sidebar before adding content.");
+        return;
+    }
     const type = activeFilter as NewContentData['type'];
     
     const tagsArray = formData.tags
@@ -148,7 +153,8 @@ function App() {
               startIcon={<PlusIcon size="sm" />}
               text="Add Content"
               onClick={() => setIsAddModalOpen(true)}
-              disabled={activeFilter === 'all' || activeFilter.startsWith('#')}
+              // !!! IMPORTANT CHANGE HERE: Removed the 'disabled' prop !!!
+              // This makes the button always enabled/clickable regardless of the activeFilter.
             />
           </div>
         </motion.header>
