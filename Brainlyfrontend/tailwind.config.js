@@ -4,6 +4,24 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx,html}"
   ],
+  safelist: [
+    'bg-brand-primary',
+    'text-white',
+    'hover:bg-brand-primary/90',
+    'bg-brand-secondary',
+    'text-brand-primary',
+    'hover:bg-brand-secondary/80',
+    'h-9',
+    'h-10',
+    'h-11',
+    'px-3',
+    'px-4',
+    'px-8',
+    'py-2',
+    'rounded-lg',
+    'text-sm',
+    'font-medium'
+  ],
   theme: {
     extend: {
       colors: {
@@ -19,9 +37,8 @@ export default {
         },
         ui:    { 
           background: '#f7fafc', 
-          // FIX: The border color is now a darker gray for better contrast.
-          border: '#cbd5e1', // This was '#e2e8f0'
-          hover: '#f3f4f6', // A slightly darker hover state
+          border: '#cbd5e1', 
+          hover: '#f3f4f6', 
         },
       },
       fontFamily: { 
