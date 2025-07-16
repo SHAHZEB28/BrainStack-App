@@ -19,7 +19,6 @@
     "noFallthroughCasesInSwitch": true,
 
     /* Vite types for defineConfig, etc. */
-    "types": ["vite/client"]
   },
   "include": ["vite.config.ts"]
 }
